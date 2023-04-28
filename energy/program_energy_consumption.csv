@@ -1,0 +1,6 @@
+cpu_usage,memory_usage,io_operations,energy_consumption
+0.5,200,10,50
+0.8,500,20,80
+0.3,100,5,30
+0.6,400,15,60
+0.4,150,7,40
