@@ -1,19 +1,34 @@
 import csv
 import subprocess
 
-# Define the pgrep name to filter by
-pgrep_name = 'turtle'
+# Define the pgrep names to filter by as a list
+pgrep_names = ['ekf_lo', 'gazebo', 'gazebo_gui', 'joy_tel', 'robot', 'teleop', 'twist', 'ros']
 
-# Run the pgrep command to get the process IDs for the specified name
-pgrep_cmd = ['pgrep', pgrep_name]
-pgrep_proc = subprocess.run(pgrep_cmd, stdout=subprocess.PIPE, universal_newlines=True)
-pgrep_output = pgrep_proc.stdout.strip().split('\n')
-pgrep_pids = [int(pid) for pid in pgrep_output]
+# Run the pgrep command to get the process IDs for the specified names
+pgrep_pids = []
+for pgrep_name in pgrep_names:
+    pgrep_cmd = ['pgrep', pgrep_name]
+    pgrep_proc = subprocess.run(pgrep_cmd, stdout=subprocess.PIPE, universal_newlines=True)
+    pgrep_output = pgrep_proc.stdout.strip().split('\n')
+    pgrep_pids += [pid for pid in pgrep_output]
+
+# Remove any duplicate PIDs
+pgrep_pids = list(set(pgrep_pids))
+
+pgrep_pids = list(filter(bool, pgrep_pids))
+
+pgrep_pids = [int(x) for x in pgrep_pids]
 print(pgrep_pids)
-# Run the top command as a subprocess for the specified PIDs and print its output in real-time
-top_cmd = ['top', '-b', '-n', '1000', '-d', '1', '-p', ','.join(str(pid) for pid in pgrep_pids)]
+
+
+# Build the top command
+top_cmd = ['top', '-b', '-n', '1000', '-d', '1']
+if pgrep_pids:
+    top_cmd += ['-p', ','.join(str(pid) for pid in pgrep_pids)]
+
+# Run the top command as a subprocess and print its output in real-time
 top_proc = subprocess.Popen(top_cmd, stdout=subprocess.PIPE, universal_newlines=True)
-print('top_proc', top_proc)
+
 # Parse the output of the top command and save it to a CSV file
 with open('output.csv', 'w') as f:
     csvwriter = csv.writer(f)
