@@ -1,8 +1,17 @@
 import csv
 import subprocess
+import time
+
+
+print('Empezar a ejecutar...')
+
+time.sleep(120)
+
+print('Comenzamos...')
 
 # Define the pgrep names to filter by as a list
-pgrep_names = ['ekf_lo', 'gazebo', 'gazebo_gui', 'joy_tel', 'robot', 'teleop', 'twist', 'ros']
+pgrep_names = ['ekf_lo', 'gazebo', 'gazebo_gui', 'joy_tel', 'robot', 'twist_', 'rostopic', 'nodo_position', 'ros', 'nodo_pid', 'pid', 'base', 'nodo_po', 'pos', 'move', 'pub', 'husk']
+
 
 # Run the pgrep command to get the process IDs for the specified names
 pgrep_pids = []

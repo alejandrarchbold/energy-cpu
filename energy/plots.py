@@ -30,7 +30,7 @@ means = df.groupby('COMMAND')['%CPU'].mean()
 
 # create a PDF file
 pdf_pages = PdfPages('category_plots.pdf')
-
+'''
 for process in processes:
 
 
@@ -51,8 +51,8 @@ for process in processes:
     plt.ylabel('% CPU')
 
     pdf_pages.savefig()
-    
-    # create a bar plot
+ '''   
+
 means.plot(kind='bar')
 plt.title('Average %CPU by rosnode')
 plt.xlabel('Node')
@@ -62,11 +62,6 @@ pdf_pages.savefig()
 
 # close the PDF file
 pdf_pages.close()
-
-
-
-
-
 
 
 
