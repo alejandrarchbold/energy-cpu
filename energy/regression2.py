@@ -27,6 +27,8 @@ data['VIRT_MB'] = data['VIRT'] / 1024
 data['RES_MB'] = data['RES'] / 1024
 data['SHR_MB'] = data['SHR'] / 1024
 
+
+# Comparacion de regresion linealg
     
 # Extract independent variables (CPU usage, memory usage, and I/O operations)
 X = data[['VIRT_MB', 'RES_MB', 'SHR_MB', 'TIME']]
