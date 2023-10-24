@@ -39,7 +39,7 @@ if pgrep_pids:
 top_proc = subprocess.Popen(top_cmd, stdout=subprocess.PIPE, universal_newlines=True)
 
 # Parse the output of the top command and save it to a CSV file
-with open('output.csv', 'w') as f:
+with open('output2.csv', 'w') as f:
     csvwriter = csv.writer(f)
     csvwriter.writerow(['PID', 'USER', 'PR', 'NI', 'VIRT', 'RES', 'SHR', 'S', '%CPU', '%MEM', 'TIME+', 'COMMAND'])
     for line in iter(top_proc.stdout.readline, ''):
@@ -50,7 +50,7 @@ with open('output.csv', 'w') as f:
             csvwriter.writerow(row)
 
 # Read the input CSV file
-with open('output.csv', 'r') as f:
+with open('output2.csv', 'r') as f:
     reader = csv.reader(f)
     headers = next(reader)
     rows = list(reader)
@@ -63,7 +63,7 @@ for row in rows:
     row.append(Energy)
 
 # Write the output CSV file
-with open('output.csv', 'w') as f:
+with open('output2.csv', 'w') as f:
     writer = csv.writer(f)
     writer.writerow(headers + ['Energy'])
     for row in rows:

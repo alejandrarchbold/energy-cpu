@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
 # read the data from a CSV file
-df = pd.read_csv('output.csv')
+df = pd.read_csv('output2.csv')
 
 df.info()
 
@@ -28,9 +28,8 @@ processes = df['COMMAND'].unique()
 # calculate the average %CPU for each category
 means = df.groupby('COMMAND')['%CPU'].mean()
 
-# create a PDF file
-pdf_pages = PdfPages('category_plots.pdf')
-'''
+pdf_pages = PdfPages('category_plots2.pdf')
+
 for process in processes:
 
 
@@ -51,7 +50,7 @@ for process in processes:
     plt.ylabel('% CPU')
 
     pdf_pages.savefig()
- '''   
+   
 
 means.plot(kind='bar')
 plt.title('Average %CPU by rosnode')

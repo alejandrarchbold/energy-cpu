@@ -59,25 +59,3 @@ print("MSE linear:", mse_linear)
 print("MSE weighted:", mse_weighted)
 
 
-### Plots
-
-data_X = data[data['COMMAND'] == 'nodo_pid.py']
-data_Y = data[data['COMMAND'] == 'ekf_localizatio']
-
-# Convertir las columnas de tiempo y energía en matrices NumPy
-time_X = np.array(data_X['TIME'])
-energy_X = np.array(data_X['Energy'])
-time_Y = np.array(data_Y['TIME'])
-energy_Y = np.array(data_Y['Energy'])
-
-# Crear las gráficas de energía a lo largo del tiempo para X y Y
-plt.plot(time_X, energy_X, label='nodo_pid.py')
-plt.plot(time_Y, energy_Y, label='ekf_localizatio')
-plt.xlabel('Time')
-plt.ylabel('Energy')
-plt.legend()
-plt.title('Compare the estimated energy from the Python executable with the energy plots from the ROS simulator.')
-plt.show()
-
-
-
